@@ -1,11 +1,13 @@
+import 'package:dashboard/Providers/calender_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Calender extends StatefulWidget {
+class DayView extends StatefulWidget {
   @override
-  _CalenderState createState() => _CalenderState();
+  _DayViewState createState() => _DayViewState();
 }
 
-class _CalenderState extends State<Calender> {
+class _DayViewState extends State<DayView> {
   String monthInCalender;
   String yearInCalender;
   int emptySlots;
@@ -28,10 +30,9 @@ class _CalenderState extends State<Calender> {
     yearInCalender = year.toString();
     //print(yearInCalender);
     month -= 2;
-    if(month<=0)
-    month--;
+    if (month <= 0) month--;
     month = (month) % 13;
-    print(month);
+    //print(month);
     if (month == 11 || month == 12) {
       year--;
     }
@@ -49,7 +50,9 @@ class _CalenderState extends State<Calender> {
 
   @override
   void didChangeDependencies() {
-    int emp = calulateDay(DateTime.now().month, DateTime.now().year);
+    int emp = calulateDay(
+        Provider.of<CalenderState>(context, listen: false).month,
+        Provider.of<CalenderState>(context, listen: false).year);
     configureList(emp);
     super.didChangeDependencies();
   }
@@ -94,9 +97,17 @@ class _CalenderState extends State<Calender> {
                     child: Text(monthInCalender + ' ,'),
                     alignment: Alignment.centerRight,
                   ),
+                  onTap: () {
+                    Provider.of<CalenderState>(context, listen: false)
+                        .reconfigureState(2);
+                  },
                 ),
                 GestureDetector(
                   child: Text(yearInCalender),
+                  onTap: () {
+                    Provider.of<CalenderState>(context, listen: false)
+                        .reconfigureState(3);
+                  },
                 ),
                 SizedBox(
                   width: 280,
@@ -124,7 +135,7 @@ class _CalenderState extends State<Calender> {
                       y++;
                       m = -1;
                     }
-                    int emp = calulateDay(m+2, y);
+                    int emp = calulateDay(m + 2, y);
                     configureList(emp);
                     setState(() {});
                   },
