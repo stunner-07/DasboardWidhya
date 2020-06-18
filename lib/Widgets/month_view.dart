@@ -20,25 +20,26 @@ class MonthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 500,
-      height: 500,
+      width: 650,
+      height: 380,
       child: Column(
         children: [
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(
-              color: Colors.black,
-              width: 2,
-            )),
-            width: 500,
-            height: 50,
+            width: 650,
+            height: 60,
             child: Center(
               child: GestureDetector(
                 child: Container(
                   width: 80,
-                  child: Text(Provider.of<CalenderState>(context, listen: false)
-                      .year
-                      .toString()),
+                  child: Text(
+                    Provider.of<CalenderState>(context, listen: false)
+                        .year
+                        .toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
                   alignment: Alignment.centerRight,
                 ),
                 onTap: () {
@@ -49,32 +50,27 @@ class MonthView extends StatelessWidget {
             ),
           ),
           Container(
-            width: 500,
-            height: 400,
-            decoration: BoxDecoration(
-                border: Border.all(
-              color: Colors.black,
-              width: 2,
-            )),
+            width: 650,
+            height: 320,
             child: GridView.builder(
                 itemCount: months.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 0,
-                  mainAxisSpacing: 0,
+                  childAspectRatio: 2,
+                  crossAxisSpacing: 0.1,
+                  mainAxisSpacing: 0.1,
                 ),
                 itemBuilder: (ctx, i) {
                   return GestureDetector(
-                    onTap: (){
-                       Provider.of<CalenderState>(context, listen: false)
-                      .setMonth(i+1);
+                    onTap: () {
+                      Provider.of<CalenderState>(context, listen: false)
+                          .setMonth(i + 1);
                     },
                     child: Card(
+                      margin: EdgeInsets.all(1.5),
+                      elevation: 2,
                       child: Container(
                         alignment: Alignment.center,
-                        height: 100,
-                        width: 100,
                         child: Text(
                           months[i],
                           style: TextStyle(),
