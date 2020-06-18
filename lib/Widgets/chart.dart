@@ -71,7 +71,7 @@ class Charts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 450,
-      height: 300,
+      height: 250,
       padding: EdgeInsets.all(20.0),
       child: barChart(),
     );

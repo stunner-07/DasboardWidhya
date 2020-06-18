@@ -19,7 +19,7 @@ class _DayViewState extends State<DayView> {
     Events(DateTime.utc(2020, 6, 30), 'Kshitij'),
     Events(DateTime.utc(2020, 6, 18), 'Rahul'),
   ];
-  List<Color> listColor=[
+  List<Color> listColor = [
     Colors.red.shade700,
     Colors.pink.shade300,
     Colors.blue,
@@ -28,7 +28,7 @@ class _DayViewState extends State<DayView> {
     Colors.green.shade500,
   ];
   Color randomColor(int i) {
-    var r= Random();
+    var r = Random();
     if (events.any((element) =>
         element.date ==
         DateTime.utc(
@@ -138,7 +138,7 @@ class _DayViewState extends State<DayView> {
   Widget build(BuildContext context) {
     return Container(
       width: 650,
-      height: 380,
+      height: 360,
       child: Column(
         children: [
           Container(
@@ -246,19 +246,54 @@ class _DayViewState extends State<DayView> {
             ),
           ),
           Container(
-            color: Colors.grey,
+            color: Colors.grey.shade400,
             width: 650,
             height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(width: 30, child: Text('Sun')),
-                Container(width: 30, child: Text('Mon')),
-                Container(width: 30, child: Text('Tue')),
-                Container(width: 30, child: Text('Wed')),
-                Container(width: 30, child: Text('Thu')),
-                Container(width: 30, child: Text('Fri')),
-                Container(width: 30, child: Text('Sat')),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Sun',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Mon',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Tue',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Wed',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Thu',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Fri',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
+                Container(
+                    width: 30,
+                    child: Text(
+                      'Sat',
+                      style: TextStyle(fontWeight: FontWeight.w300),
+                    )),
               ],
             ),
           ),

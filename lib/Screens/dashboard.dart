@@ -26,7 +26,35 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
+                  Container(
+                    padding: EdgeInsets.only(left: 60),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Hi, Champion !!",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Calender(),
+                  Container(
+                    padding: EdgeInsets.only(left: 60),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Suggested Missions",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [],
+                  ),
                 ],
               ),
             ),
@@ -34,6 +62,37 @@ class DashboardScreen extends StatelessWidget {
               flex: 2,
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 85,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 40),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Upcoming Missions",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 280,
+                    child: Column(
+                      children: [],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 60),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Data Science Mission",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   Charts(),
                 ],
               ),

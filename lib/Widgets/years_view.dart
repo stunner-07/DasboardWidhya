@@ -11,7 +11,7 @@ class YearsView extends StatelessWidget {
     }
     return Container(
       width: 650,
-      height: 380,
+      height: 360,
       child: Column(
         children: [
           Container(
@@ -35,7 +35,7 @@ class YearsView extends StatelessWidget {
           ),
           Container(
             width: 650,
-            height: 320,
+            height: 300,
             child: GridView.builder(
                 itemCount: years.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

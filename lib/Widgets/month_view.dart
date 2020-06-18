@@ -21,7 +21,7 @@ class MonthView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 650,
-      height: 380,
+      height: 360,
       child: Column(
         children: [
           Container(
@@ -51,7 +51,7 @@ class MonthView extends StatelessWidget {
           ),
           Container(
             width: 650,
-            height: 320,
+            height: 300,
             child: GridView.builder(
                 itemCount: months.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
