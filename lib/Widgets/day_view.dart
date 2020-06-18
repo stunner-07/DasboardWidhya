@@ -32,7 +32,7 @@ class _DayViewState extends State<DayView> {
     if (events.any((element) =>
         element.date ==
         DateTime.utc(
-            int.parse(yearInCalender), months.indexOf(monthInCalender) + 1, i)))
+            int.parse(yearInCalender), months.indexOf(monthInCalender) + 1, i)) && l[i]!='')
       return listColor[r.nextInt(5)];
     else
       return Colors.white;
@@ -318,7 +318,7 @@ class _DayViewState extends State<DayView> {
                         if (events.any((element) =>
                             element.date ==
                             DateTime.utc(int.parse(yearInCalender),
-                                months.indexOf(monthInCalender) + 1, i)))
+                                months.indexOf(monthInCalender) + 1, i)) && l[i]!='')
                           Positioned(
                             top: 1,
                             right: 1,

@@ -1,4 +1,5 @@
 import 'package:dashboard/Widgets/chart.dart';
+import 'package:dashboard/Widgets/tabs_mission.dart';
 import 'package:flutter/material.dart';
 
 import 'calender_screen.dart';
@@ -38,7 +39,7 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Calender(),
                   Container(
@@ -47,7 +48,7 @@ class DashboardScreen extends StatelessWidget {
                     child: Text(
                       "Suggested Missions",
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 26,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -63,7 +64,7 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 85,
+                    height: 30,
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 40),
@@ -71,16 +72,14 @@ class DashboardScreen extends StatelessWidget {
                     child: Text(
                       "Upcoming Missions",
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 26,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                   Container(
-                    height: 280,
-                    child: Column(
-                      children: [],
-                    ),
+                    height: 370,
+                    child: MissionTabs(),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 60),
