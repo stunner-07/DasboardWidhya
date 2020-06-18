@@ -70,7 +70,7 @@ class DashboardScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: 40),
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Upcoming Missions",
+                      "Missions",
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w500,
@@ -78,7 +78,10 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 370,
+                    margin: EdgeInsets.only(
+                      top: 10,
+                    ),
+                    height: 350,
                     child: MissionTabs(),
                   ),
                   Container(

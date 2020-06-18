@@ -1,4 +1,5 @@
 import 'package:dashboard/Providers/calender_state.dart';
+import 'package:dashboard/Providers/mission_provider.dart';
 import 'package:dashboard/Screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,13 +14,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: CalenderState(),
         ),
+        ChangeNotifierProvider.value(
+          value: MissionProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Widhya',
         theme: ThemeData(
           primaryColor: Colors.grey,
-          accentColor: Colors.purpleAccent,
+          accentColor: Colors.blue.shade800,
         ),
         home: DashboardScreen(),
         routes: {},

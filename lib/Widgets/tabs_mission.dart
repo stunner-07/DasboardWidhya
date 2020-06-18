@@ -11,14 +11,24 @@ class MissionTabs extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 50,
+              height: 40,
               child: TabBar(
                 tabs: [
                   Tab(
-                    text: 'Active Mission',
+                    child: Text(
+                      'Active Mission',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   Tab(
-                    text: 'Completed Mission',
+                    child: Text(
+                      'Completed Mission',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -29,7 +39,7 @@ class MissionTabs extends StatelessWidget {
                 bottom: 20,
                 right: 20,
               ),
-              height: 280,
+              height: 260,
               // decoration: BoxDecoration(
               //     border: Border.all(
               //   color: Colors.black,
