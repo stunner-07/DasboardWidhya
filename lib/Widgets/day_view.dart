@@ -1,6 +1,8 @@
+import 'package:dashboard/Models/events.dart';
 import 'package:dashboard/Providers/calender_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
 
 class DayView extends StatefulWidget {
   @override
@@ -8,6 +10,34 @@ class DayView extends StatefulWidget {
 }
 
 class _DayViewState extends State<DayView> {
+  List<Events> events = [
+    Events(DateTime.utc(2020, 6, 17), 'Widhya'),
+    Events(DateTime.utc(2020, 6, 5), 'Maths'),
+    Events(DateTime.utc(2020, 6, 21), 'Code'),
+    Events(DateTime.utc(2020, 6, 12), 'Develop'),
+    Events(DateTime.utc(2020, 6, 27), 'Learn'),
+    Events(DateTime.utc(2020, 6, 30), 'Kshitij'),
+    Events(DateTime.utc(2020, 6, 18), 'Rahul'),
+  ];
+  List<Color> listColor=[
+    Colors.red.shade700,
+    Colors.pink.shade300,
+    Colors.blue,
+    Colors.yellow,
+    Colors.purpleAccent.shade700,
+    Colors.green.shade500,
+  ];
+  Color randomColor(int i) {
+    var r= Random();
+    if (events.any((element) =>
+        element.date ==
+        DateTime.utc(
+            int.parse(yearInCalender), months.indexOf(monthInCalender) + 1, i)))
+      return listColor[r.nextInt(5)];
+    else
+      return Colors.white;
+  }
+
   String monthInCalender;
   String yearInCalender;
   int emptySlots;
@@ -87,18 +117,17 @@ class _DayViewState extends State<DayView> {
     for (int i = 1; i <= t; i++) {
       l.add(i.toString());
     }
-    if(t==28){
-      k=7-empty;
-      if(k==7)
-      k=0;
-      for (int i = 0; i <k ; i++) {
-      l.add('');
-    }
-    emptySlots = empty;
+    if (t == 28) {
+      k = 7 - empty;
+      if (k == 7) k = 0;
+      for (int i = 0; i < k; i++) {
+        l.add('');
+      }
+      emptySlots = empty;
       return;
     }
-    k=(k - empty) % 7;
-    for (int i = 0; i <k ; i++) {
+    k = (k - empty) % 7;
+    for (int i = 0; i < k; i++) {
       l.add('');
     }
     emptySlots = empty;
@@ -171,6 +200,7 @@ class _DayViewState extends State<DayView> {
                   right: 70,
                   child: IconButton(
                     padding: EdgeInsets.only(
+                      bottom: 10,
                       right: 5,
                     ),
                     iconSize: 15,
@@ -193,6 +223,7 @@ class _DayViewState extends State<DayView> {
                   right: 20,
                   child: IconButton(
                     padding: EdgeInsets.only(
+                      bottom: 10,
                       left: 5,
                     ),
                     alignment: Alignment.centerLeft,
@@ -244,15 +275,43 @@ class _DayViewState extends State<DayView> {
                 ),
                 itemBuilder: (ctx, i) {
                   return Card(
+                    color: randomColor(i),
                     margin: EdgeInsets.all(1.5),
                     elevation: 2,
-                    child: Container(
-                      alignment: Alignment.bottomLeft,
-                      child: Text(
-                        l[i],
-                        style: TextStyle(),
-                        textAlign: TextAlign.start,
-                      ),
+                    child: Stack(
+                      children: [
+                        if (events.any((element) =>
+                            element.date ==
+                            DateTime.utc(int.parse(yearInCalender),
+                                months.indexOf(monthInCalender) + 1, i)))
+                          Positioned(
+                            top: 1,
+                            right: 1,
+                            child: Text(
+                              events
+                                  .firstWhere((element) =>
+                                      element.date ==
+                                      DateTime.utc(
+                                          int.parse(yearInCalender),
+                                          months.indexOf(monthInCalender) + 1,
+                                          i))
+                                  .msg,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        Positioned(
+                          bottom: 1,
+                          left: 1,
+                          child: Text(
+                            l[i],
+                            style: TextStyle(),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 }),

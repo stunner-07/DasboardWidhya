@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         title: 'Widhya',
         theme: ThemeData(
           primaryColor: Colors.grey,
-          accentColor: Colors.green,
+          accentColor: Colors.purpleAccent,
         ),
         home: DashboardScreen(),
         routes: {},

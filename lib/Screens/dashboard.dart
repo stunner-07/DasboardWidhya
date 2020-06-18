@@ -23,6 +23,9 @@ class DashboardScreen extends StatelessWidget {
               flex: 3,
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   Calender(),
                 ],
               ),
