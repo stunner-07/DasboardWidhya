@@ -20,20 +20,20 @@ class _DayViewState extends State<DayView> {
     Events(DateTime.utc(2020, 6, 18), 'Rahul'),
   ];
   List<Color> listColor = [
-    Colors.red.shade700,
-    Colors.pink.shade300,
-    Colors.blue,
-    Colors.yellow,
-    Colors.purpleAccent.shade700,
-    Colors.green.shade500,
+    Colors.red.shade200,
+    Colors.blue.shade200,
+    Colors.yellow.shade200,
+    Colors.purpleAccent.shade200,
+    Colors.green.shade200,
   ];
   Color randomColor(int i) {
     var r = Random();
     if (events.any((element) =>
-        element.date ==
-        DateTime.utc(
-            int.parse(yearInCalender), months.indexOf(monthInCalender) + 1, i)) && l[i]!='')
-      return listColor[r.nextInt(5)];
+            element.date ==
+            DateTime.utc(int.parse(yearInCalender),
+                months.indexOf(monthInCalender) + 1, i)) &&
+        l[i] != '')
+      return listColor[r.nextInt(4)];
     else
       return Colors.white;
   }
@@ -137,12 +137,12 @@ class _DayViewState extends State<DayView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 650,
+      width: 600,
       height: 360,
       child: Column(
         children: [
           Container(
-            width: 650,
+            width: 600,
             height: 40,
             child: Stack(
               children: [
@@ -247,7 +247,7 @@ class _DayViewState extends State<DayView> {
           ),
           Container(
             color: Colors.grey.shade400,
-            width: 650,
+            width: 600,
             height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -298,7 +298,7 @@ class _DayViewState extends State<DayView> {
             ),
           ),
           Container(
-            width: 650,
+            width: 600,
             height: emptySlots >= 5 ? 300 : 250,
             child: GridView.builder(
                 itemCount: l.length,
@@ -309,44 +309,55 @@ class _DayViewState extends State<DayView> {
                   mainAxisSpacing: 0.1,
                 ),
                 itemBuilder: (ctx, i) {
-                  return Card(
-                    color: randomColor(i),
-                    margin: EdgeInsets.all(1.5),
-                    elevation: 2,
-                    child: Stack(
-                      children: [
-                        if (events.any((element) =>
-                            element.date ==
-                            DateTime.utc(int.parse(yearInCalender),
-                                months.indexOf(monthInCalender) + 1, i)) && l[i]!='')
-                          Positioned(
-                            top: 1,
-                            right: 1,
-                            child: Text(
-                              events
-                                  .firstWhere((element) =>
-                                      element.date ==
-                                      DateTime.utc(
-                                          int.parse(yearInCalender),
-                                          months.indexOf(monthInCalender) + 1,
-                                          i))
-                                  .msg,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                  return Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 0.5,
+                        )),
+                    child: Card(
+                      color: randomColor(i),
+                      margin: EdgeInsets.all(1.5),
+                      elevation: 0,
+                      child: Stack(
+                        children: [
+                          if (events.any((element) =>
+                                  element.date ==
+                                  DateTime.utc(
+                                      int.parse(yearInCalender),
+                                      months.indexOf(monthInCalender) + 1,
+                                      i)) &&
+                              l[i] != '')
+                            Positioned(
+                              top: 1,
+                              right: 1,
+                              child: Text(
+                                events
+                                    .firstWhere((element) =>
+                                        element.date ==
+                                        DateTime.utc(
+                                            int.parse(yearInCalender),
+                                            months.indexOf(monthInCalender) + 1,
+                                            i))
+                                    .msg,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
+                          Positioned(
+                            bottom: 1,
+                            left: 1,
+                            child: Text(
+                              l[i],
+                              style: TextStyle(),
+                              textAlign: TextAlign.start,
+                            ),
                           ),
-                        Positioned(
-                          bottom: 1,
-                          left: 1,
-                          child: Text(
-                            l[i],
-                            style: TextStyle(),
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 }),
