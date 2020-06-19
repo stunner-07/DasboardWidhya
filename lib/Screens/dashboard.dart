@@ -88,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: 60),
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Data Science Mission",
+                      "Microtasks",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
