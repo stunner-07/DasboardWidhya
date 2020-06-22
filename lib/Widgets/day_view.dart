@@ -22,7 +22,7 @@ class _DayViewState extends State<DayView> {
   List<Color> listColor = [
     Colors.red.shade200,
     Colors.blue.shade200,
-    Colors.yellow.shade200,
+    Colors.pink.shade200,
     Colors.purpleAccent.shade200,
     Colors.green.shade200,
   ];
@@ -134,230 +134,226 @@ class _DayViewState extends State<DayView> {
     //setState(() {});
   }
 
+  final _headerTextStyle =
+      TextStyle(fontWeight: FontWeight.w500, color: Color(0xFF54514d));
+
+  bool _hasEvent(int i) => (events.any((element) =>
+              element.date ==
+              DateTime.utc(int.parse(yearInCalender),
+                  months.indexOf(monthInCalender) + 1, i)) &&
+          l[i] != '')
+      ? true
+      : false;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 600,
-      height: 360,
       child: Column(
         children: [
           Container(
-            width: 600,
-            height: 40,
-            child: Stack(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Positioned(
-                  left: 10,
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(
-                            left: 0,
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          // width: 80,
-                          child: Text(
-                            monthInCalender + ' ',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(
+                          left: 0,
+                          bottom: 5,
+                          top: 5,
+                        ),
+                        // width: 80,
+                        child: Text(
+                          monthInCalender + ' ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
-                        onTap: () {
-                          Provider.of<CalenderState>(context, listen: false)
-                              .reconfigureState(2);
-                        },
                       ),
-                      GestureDetector(
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(
-                            left: 0,
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: Text(
-                            yearInCalender,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                      onTap: () {
+                        Provider.of<CalenderState>(context, listen: false)
+                            .reconfigureState(2);
+                      },
+                    ),
+                    GestureDetector(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(
+                          left: 0,
+                          bottom: 5,
+                          top: 5,
+                        ),
+                        child: Text(
+                          yearInCalender,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
-                        onTap: () {
-                          Provider.of<CalenderState>(context, listen: false)
-                              .reconfigureState(3);
-                        },
                       ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  right: 70,
-                  child: IconButton(
-                    padding: EdgeInsets.only(
-                      bottom: 10,
-                      right: 5,
+                      onTap: () {
+                        Provider.of<CalenderState>(context, listen: false)
+                            .reconfigureState(3);
+                      },
                     ),
-                    iconSize: 15,
-                    alignment: Alignment.centerRight,
-                    onPressed: () {
-                      int m = months.indexOf(monthInCalender);
-                      int y = int.parse(yearInCalender);
-                      if (m == 0) {
-                        y--;
-                        m = 12;
-                      }
-                      int emp = calulateDay(m, y);
-                      configureList(emp);
-                      setState(() {});
-                    },
-                    icon: Icon(Icons.arrow_back_ios),
-                  ),
+                  ],
                 ),
-                Positioned(
-                  right: 20,
-                  child: IconButton(
-                    padding: EdgeInsets.only(
-                      bottom: 10,
-                      left: 5,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        int m = months.indexOf(monthInCalender);
+                        int y = int.parse(yearInCalender);
+                        if (m == 0) {
+                          y--;
+                          m = 12;
+                        }
+                        int emp = calulateDay(m, y);
+                        configureList(emp);
+                        setState(() {});
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 16.0,
+                        ),
+                      ),
                     ),
-                    alignment: Alignment.centerLeft,
-                    iconSize: 15,
-                    onPressed: () {
-                      int m = months.indexOf(monthInCalender);
-                      int y = int.parse(yearInCalender);
-                      if (m == 11) {
-                        y++;
-                        m = -1;
-                      }
-                      int emp = calulateDay(m + 2, y);
-                      configureList(emp);
-                      setState(() {});
-                    },
-                    icon: Icon(Icons.arrow_forward_ios),
-                  ),
+                    InkWell(
+                      onTap: () {
+                        int m = months.indexOf(monthInCalender);
+                        int y = int.parse(yearInCalender);
+                        if (m == 11) {
+                          y++;
+                          m = -1;
+                        }
+                        int emp = calulateDay(m + 2, y);
+                        configureList(emp);
+                        setState(() {});
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16.0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
           Container(
-            color: Colors.grey.shade400,
-            width: 600,
-            height: 20,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.grey.shade100,
+            ),
+            padding: EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 4.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                    width: 30,
                     child: Text(
-                      'Sun',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Sun',
+                  style: _headerTextStyle,
+                )),
                 Container(
-                    width: 30,
                     child: Text(
-                      'Mon',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Mon',
+                  style: _headerTextStyle,
+                )),
                 Container(
-                    width: 30,
                     child: Text(
-                      'Tue',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Tue',
+                  style: _headerTextStyle,
+                )),
                 Container(
-                    width: 30,
                     child: Text(
-                      'Wed',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Wed',
+                  style: _headerTextStyle,
+                )),
                 Container(
-                    width: 30,
                     child: Text(
-                      'Thu',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Thu',
+                  style: _headerTextStyle,
+                )),
                 Container(
-                    width: 30,
                     child: Text(
-                      'Fri',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Fri',
+                  style: _headerTextStyle,
+                )),
                 Container(
-                    width: 30,
                     child: Text(
-                      'Sat',
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    )),
+                  'Sat',
+                  style: _headerTextStyle,
+                )),
               ],
             ),
           ),
+          SizedBox(
+            height: 8.0,
+          ),
           Container(
-            width: 600,
-            height: emptySlots >= 5 ? 300 : 250,
             child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: l.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 7,
-                  childAspectRatio: 2,
-                  crossAxisSpacing: 0.1,
-                  mainAxisSpacing: 0.1,
+                  childAspectRatio: 1.6,
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 2,
                 ),
                 itemBuilder: (ctx, i) {
                   return Container(
+                    padding: EdgeInsets.all(4.0),
+                    margin: EdgeInsets.all(1.5),
                     decoration: BoxDecoration(
+                        color: randomColor(i),
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
-                          color: Colors.grey,
-                          width: 0.5,
+                          color:
+                              l[i] != '' ? Colors.grey.shade200 : Colors.white,
                         )),
-                    child: Card(
-                      color: randomColor(i),
-                      margin: EdgeInsets.all(1.5),
-                      elevation: 0,
-                      child: Stack(
-                        children: [
-                          if (events.any((element) =>
-                                  element.date ==
-                                  DateTime.utc(
-                                      int.parse(yearInCalender),
-                                      months.indexOf(monthInCalender) + 1,
-                                      i)) &&
-                              l[i] != '')
-                            Positioned(
-                              top: 1,
-                              right: 1,
-                              child: Text(
-                                events
-                                    .firstWhere((element) =>
-                                        element.date ==
-                                        DateTime.utc(
-                                            int.parse(yearInCalender),
-                                            months.indexOf(monthInCalender) + 1,
-                                            i))
-                                    .msg,
-                                style: TextStyle(
+                    child: Stack(
+                      children: [
+                        if (_hasEvent(i))
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Text(
+                              events
+                                  .firstWhere((element) =>
+                                      element.date ==
+                                      DateTime.utc(
+                                          int.parse(yearInCalender),
+                                          months.indexOf(monthInCalender) + 1,
+                                          i))
+                                  .msg,
+                              style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          Positioned(
-                            bottom: 1,
-                            left: 1,
-                            child: Text(
-                              l[i],
-                              style: TextStyle(),
-                              textAlign: TextAlign.start,
+                                  color: Colors.white, letterSpacing: 0.5),
                             ),
                           ),
-                        ],
-                      ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          child: Text(
+                            l[i],
+                            style: TextStyle(
+                                color: _hasEvent(i)
+                                    ? Colors.white
+                                    : Colors.grey.shade600),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 }),

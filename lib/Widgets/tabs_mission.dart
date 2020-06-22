@@ -1,8 +1,9 @@
 import 'package:dashboard/Screens/active_mission.dart';
-import 'package:dashboard/Screens/completed_mission.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MissionTabs extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,14 +12,22 @@ class MissionTabs extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 40,
               child: TabBar(
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Theme.of(context).accentColor.withOpacity(0.15)),
+                labelColor: Theme.of(context).accentColor,
+                unselectedLabelColor: Colors.grey.shade400,
                 tabs: [
                   Tab(
-                    child: Text(
-                      'Active Mission',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Active Mission',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -34,20 +43,11 @@ class MissionTabs extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                top: 20,
-                bottom: 20,
-                right: 20,
-              ),
-              height: 260,
-              // decoration: BoxDecoration(
-              //     border: Border.all(
-              //   color: Colors.black,
-              //   width: 2,
-              // )),
+              padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
+              height:  MediaQuery.of(context).size.height * 0.5,
               child: TabBarView(children: [
-                ActiveMissions(),
-                CompletedMissions(),
+                MissionsList(missionsType: MissionsType.active,),
+                MissionsList(missionsType: MissionsType.completed,),
               ]),
             )
           ],

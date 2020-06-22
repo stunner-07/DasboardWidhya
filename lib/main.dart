@@ -1,33 +1,28 @@
-import 'package:dashboard/Providers/calender_state.dart';
-import 'package:dashboard/Providers/mission_provider.dart';
 import 'package:dashboard/Screens/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: CalenderState(),
-        ),
-        ChangeNotifierProvider.value(
-          value: MissionProvider(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Widhya',
-        theme: ThemeData(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Widhya',
+      theme: ThemeData(
           primaryColor: Colors.grey,
-          accentColor: Colors.blue.shade800,
-        ),
-        home: DashboardScreen(),
-        routes: {},
-      ),
+          accentColor: Color(0xff8921aa),
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme,
+          ),
+          tabBarTheme: TabBarTheme(
+              labelStyle: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w400, letterSpacing: 0.5),
+              unselectedLabelStyle: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w300, letterSpacing: 0.3))),
+      home: DashboardScreen(),
+      routes: {},
     );
   }
 }

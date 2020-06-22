@@ -54,9 +54,7 @@ class Charts extends StatelessWidget {
       mission = Provider.of<MissionProvider>(context).selectedMission;
     List<ch.Series> seriesList = _createData(mission);
     return Container(
-      width: 450,
-      height: 250,
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(8.0),
       child: ch.BarChart(
         seriesList,
         animate: true,

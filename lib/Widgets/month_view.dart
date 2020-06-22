@@ -20,45 +20,41 @@ class MonthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 650,
-      height: 360,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 650,
-            height: 60,
-            child: Center(
-              child: GestureDetector(
-                child: Container(
-                  width: 80,
-                  child: Text(
-                    Provider.of<CalenderState>(context, listen: false)
-                        .year
-                        .toString(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+            child: GestureDetector(
+              child: Container(
+                child: Text(
+                  'Select Month, ' + Provider.of<CalenderState>(context, listen: false)
+                      .year
+                      .toString(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
-                  alignment: Alignment.centerRight,
                 ),
-                onTap: () {
-                  Provider.of<CalenderState>(context, listen: false)
-                      .reconfigureState(3);
-                },
               ),
+              onTap: () {
+                Provider.of<CalenderState>(context, listen: false)
+                    .reconfigureState(3);
+              },
             ),
           ),
+          SizedBox(
+            height: 8.0,
+          ),
           Container(
-            width: 650,
-            height: 300,
             child: GridView.builder(
+              shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: months.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 2,
-                  crossAxisSpacing: 0.1,
-                  mainAxisSpacing: 0.1,
+                  childAspectRatio: 1.6,
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 2,
                 ),
                 itemBuilder: (ctx, i) {
                   return GestureDetector(
@@ -66,16 +62,19 @@ class MonthView extends StatelessWidget {
                       Provider.of<CalenderState>(context, listen: false)
                           .setMonth(i + 1);
                     },
-                    child: Card(
-                      margin: EdgeInsets.all(1.5),
-                      elevation: 2,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          months[i],
-                          style: TextStyle(),
-                          textAlign: TextAlign.center,
-                        ),
+                    child: Container(
+                      padding: EdgeInsets.all(4.0),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Colors.grey.shade200 ,
+                        )),
+                      child: Text(
+                        months[i],
+                        style: TextStyle(),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   );
